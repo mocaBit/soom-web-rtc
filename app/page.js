@@ -1,10 +1,27 @@
 'use client'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useConnect } from "./useConnect"
+
+const SOCKET_URL = 'http://localhost:3001'
 
 export default function Page() {
-  const [joinId, setJoinId] = useState('')
+  const [joinId, setJoinId] = useState(null)
 
-  const { id, status, myVideo, externalVideo, join, accept, leave } = useConnect('http://localhost:3001')
+  const { id, status, myVideo, externalVideo, join, accept, leave } = useConnect(SOCKET_URL)
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search)
+    const id = urlParams.get('id')
+    if (id) {
+      setJoinId(id)
+    }
+  }, [])
+
+
+  const copyMeetUrlToClipboard = () => {
+    const meetUrl = `${location.origin}?id=${id}`
+    navigator.clipboard.writeText(meetUrl)
+  }
 
   return (
     <>
@@ -21,24 +38,20 @@ export default function Page() {
           </div>
         </div>
         <div>
-          <label>Meet id: [{id}]</label>
-          <br />
-          <label>
-            Join Meet Id:
-            <input value={joinId} onChange={(e) => setJoinId(e.target.value)} />
-          </label>
-          <div>
-            {status === 'online' ? (
-              <button onClick={leave}>
-                End Call
-              </button>
-            ) : (
-              <button onClick={() => join(joinId)}>
-                Join to Meet
-              </button>
-            )}
-            {joinId}
-          </div>
+          {joinId === null ? (
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+              onClick={copyMeetUrlToClipboard}
+            >Copy meet url
+            </button>
+          ) : status === 'online' ? (
+            <button onClick={leave}>
+              End Call
+            </button>
+          ) : (<button onClick={() => join(joinId)}>
+            Join to Meet
+          </button>)
+          }
         </div>
         <div>
           {status === 'requested' ? (

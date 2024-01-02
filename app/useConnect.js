@@ -14,8 +14,7 @@ export const useConnect = (url) => {
     const [incomingCall, setIncomingCall] = useState(null)
 
     useEffect(() => {
-        navigator.mediaDevices
-            .getUserMedia({ video: true, audio: true })
+        navigator.mediaDevices?.getUserMedia({ video: true, audio: true })
             .then((stream) => {
                 myVideo.current.srcObject = stream
             })
