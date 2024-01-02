@@ -15,14 +15,21 @@ npm run dev
 ```
 
 1. Open [http://localhost:3000](http://localhost:3000) and allow permissions to use camera and microphone
+
 ![allow permissions](https://github.com/mocaBit/soom-web-rtc/blob/master/assets/step1.png)
+
 2. Copy meet url clicking on button. (This will copy value to clipboard)
+
 ![copy meet url](https://github.com/mocaBit/soom-web-rtc/blob/master/assets/step2.png)
+
 3. Open another browser tab with meet url and click on "Join to Meet" button
+
 ![join to meet](https://github.com/mocaBit/soom-web-rtc/blob/master/assets/step3.png)
-3. From first tab accept join request clicking on "Answer" button.
+
+4. From first tab accept join request clicking on "Answer" button.
+
 ![answer call](https://github.com/mocaBit/soom-web-rtc/blob/master/assets/step4.png)
 
+5. You finally have a call
 
-you finally have a call
 ![calling together](https://github.com/mocaBit/soom-web-rtc/blob/master/assets/step5.png)
